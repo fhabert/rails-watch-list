@@ -1,0 +1,53 @@
+<div class="banner">
+    <div class="container text-center">
+        <h1 class="home-title"> <%= @list.name %> </h1>
+        <h2 class="home-subtitle">Your favorite movies for this section</h2>
+    </div>
+</div>
+<div class="container mt-5">
+    <div class="d-flex justify-content-center my-5">
+        <%= link_to "Add a Movie", new_list_movie_path(@list), class:"btn btn-outline-success" %>
+    </div>
+    <div class="d-flex align-items-center justify-content-around">
+        <% if @movies != nil %>
+            <% @movies.each do |movie| %>
+                <div class="card card-movies card-shadow" style="width: 400px;">
+                    <img src="<%= movie.poster_url %>" class="card-img-top image-card" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= movie.title %> <%= movie.rating %></h5>
+                        <p class="card-text"><%= movie.overview %></p>
+                        <% bookmark = @bookmarks.where(movie_id: movie.id) %>
+                        <%= link_to "delete", list_path(movie), method: :delete %>
+                    </div>
+                </div>
+            <% end %>
+        <% end %>
+    </div>
+    <div class="container d-flex justify-content-around mt-5" id="reviews-infos">
+        <div class="">
+            <% @reviews.each do |review| %>
+                <div class="card-review-message d-flex justify-content-around  align-items-center mb-3">
+                    <img class="avatar-bordered" src="https://images.unsplash.com/photo-1505925456693-124134d66749?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="">
+                    <div class="content-review card-review-flex col-9">
+                        <h5><%= review.content %></h5>
+                        <% for _ in 0...review.rating %>
+                            <i class="fas fa-star" style="margin-bottom: 0px;"></i>
+                        <% end %>
+                        <% for _ in 0...(5-review.rating) %>
+                            <i class="fas fa-star" style="margin-bottom: 0px; opacity: 0.3;"></i>
+                        <% end %>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+        <div class="card-review">
+            <%= simple_form_for [@list, @review] do |f| %>
+                <%= f.label :rating, "Rating.." %>
+                <%= f.text_field :rating, class: "form-control", type: "integer" %>
+                <%= f.label :content, "Comment here..", class:"my-2" %>
+                <%= f.text_field :content, class: "form-control", type: "text" %> 
+                <%= f.submit "Create Review", class: "btn btn-primary mt-3" %>
+            <% end %>
+        </div>
+    </div>
+</div>

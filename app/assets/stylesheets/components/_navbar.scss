@@ -1,0 +1,31 @@
+.navbar-lewagon {
+  justify-content: space-between;
+  background: transparent;
+}
+
+.navbar-lewagon .navbar-collapse {
+  flex-grow: 0;
+}
+
+.navbar-lewagon .navbar-brand img {
+  width: 40px;
+}
+
+.navbar-home {
+  background: transparent;
+  transition: 0.5s background-color ease;
+  font-size: 24px;
+  font-weight: 600;
+  top: 0;
+  position:fixed;
+  padding: 20px;
+  width: 100%;
+  a {
+      text-decoration: none;
+      color: white;
+  }
+}
+
+.navbar-home-black {
+  background-color: rgb(29, 25, 25);
+}

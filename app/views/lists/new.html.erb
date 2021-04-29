@@ -1,0 +1,17 @@
+<div class="banner">
+    <div class="container text-center">
+        <h1 class="home-title">Add a list your store</h1>
+        <h2 class="home-subtitle">By simply filling up this form</h2>
+    </div>
+</div>
+<div class="container d-flex justify-content-around mt-4">
+    <div class="form-input">
+        <%= simple_form_for(@list) do |f| %>
+            <%= f.label :name, "What's the name of it", class: "my-3" %>
+            <%= f.text_field :name, class: "form-control" %>
+            <%= f.label :url_path, "What's the url path?", class: "my-3"%>
+            <%= f.text_field :url_path, class: "form-control" %>
+            <%= f.submit "Add list", class: "btn btn-primary mt-3" %>
+        <% end %>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="banner">
+    <div class="container text-center">
+        <h1 class="home-title"> <%= @list.name %> </h1>
+        <h2 class="home-subtitle">YAdd a movie to this section</h2>
+    </div>
+</div>
+<div class="container d-flex justify-content-around mt-4">
+    <div class="form-input">
+        <%= simple_form_for([@list, @movie]) do |f| %>
+            <%= f.label :title, "What's the title of it", class: "my-3" %>
+            <%= f.text_field :title, class: "form-control" %>
+            <%= f.label :overview, "What's the overview", class: "my-3" %>
+            <%= f.text_field :overview, class: "form-control" %>
+            <%= f.label :rating, "What's its rating?", class: "my-3" %>
+            <%= f.text_field :rating, class: "form-control" %>
+            <%= f.label :poster_url, "What's the url path?", class: "my-3"%>
+            <%= f.text_field :poster_url, class: "form-control" %>
+            <%= f.submit "Add Movie to list", class: "btn btn-primary mt-3" %>
+        <% end %>
+    </div>
+</div>

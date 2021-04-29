@@ -1,0 +1,17 @@
+<div class="banner">
+    <div class="container text-center">
+        <h1 class="home-title">Save any kind of movies</h1>
+        <p class="home-subtitle"><span id="banner-typed-text"></span></p>
+    </div>
+</div>
+<div class="infos-card d-flex justify-content-center">
+        <div class="cards-lists mt-5">
+            <% @lists.each do |list| %>
+                <div class="card card-list card-shadow" style="width: 500px;">
+                    <img src="<%= list.url_path%>" class="card-img-top" height="300px" style="background: linear-gradient(to left, rgba(0,0,0,0.8) -26.48%, rgba(0,0,0,0.8) 73.52%);">
+                    <%= link_to "#{list.name}", list_path(list), class: "list-title" %>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>
