@@ -8,6 +8,7 @@ class ListsController < ApplicationController
         @list = List.find(list_id)
         @bookmarks = Bookmark.where(list_id: list_id)
         @movies = find_movies(@bookmarks)
+        @movie_count = @movies.length
         @review = Review.new(list_id: list_id)
         @reviews = Review.where(list_id: list_id)
     end
@@ -25,6 +26,12 @@ class ListsController < ApplicationController
         @list = List.new()
     end
 
+    def destroy
+        movie = params[:id]
+        movie_del = Movie.find(movie)
+        movie_del.destroy
+    end
+
     private
 
     def find_movies(bookmarks)
@@ -38,7 +45,7 @@ class ListsController < ApplicationController
                 movies << Movie.find(id)
             end 
         else 
-            movies << Movie.find(bookmarks[:movie_id])
+            movies << Movie.find(bookmarks[0][:movie_id])
         end
         return movies
     end

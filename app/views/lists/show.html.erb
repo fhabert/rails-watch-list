@@ -1,17 +1,22 @@
 <div class="banner">
     <div class="container text-center">
+        <% if @movie_count == 1 %>
+            <p class="movies-count p-2"><%= @movie_count %> movie </p>
+        <% else %>
+            <p class="movies-count p-2"><%= @movie_count %> movies </p>
+        <% end %>
         <h1 class="home-title"> <%= @list.name %> </h1>
         <h2 class="home-subtitle">Your favorite movies for this section</h2>
     </div>
 </div>
 <div class="container mt-5">
     <div class="d-flex justify-content-center my-5">
-        <%= link_to "Add a Movie", new_list_movie_path(@list), class:"btn btn-outline-success" %>
+        <%= link_to "Add a Movie", new_list_bookmark_path(@list), class:"btn btn-outline-success" %>
     </div>
-    <div class="d-flex align-items-center justify-content-around">
+    <div class="movies-cards">
         <% if @movies != nil %>
             <% @movies.each do |movie| %>
-                <div class="card card-movies card-shadow" style="width: 400px;">
+                <div data-aos="fade-right" data-aos-duration="1000" data-aos-delay="50" class="card card-movies card-shadow" style="width: 400px;">
                     <img src="<%= movie.poster_url %>" class="card-img-top image-card" alt="...">
                     <div class="card-body">
                         <h5 class="card-title"><%= movie.title %> <%= movie.rating %></h5>
@@ -43,7 +48,13 @@
         <div class="card-review">
             <%= simple_form_for [@list, @review] do |f| %>
                 <%= f.label :rating, "Rating.." %>
-                <%= f.text_field :rating, class: "form-control", type: "integer" %>
+                <select id="rating-star"> 
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
                 <%= f.label :content, "Comment here..", class:"my-2" %>
                 <%= f.text_field :content, class: "form-control", type: "text" %> 
                 <%= f.submit "Create Review", class: "btn btn-primary mt-3" %>
