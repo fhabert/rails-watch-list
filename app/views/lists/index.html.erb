@@ -8,6 +8,9 @@
         <div class="cards-lists mt-5">
             <% @lists.each do |list| %>
                 <div data-aos="flip-up" class="card card-list card-shadow" style="width: 500px;">
+                    <% if list.photo.attached? %>
+                        <%= cl_image_tag list.photo.key, crop: :fill, :class => "avatar-bordered avatar-list" %>
+                    <% end %>
                     <img src="<%= list.url_path%>" class="card-img-top" height="300px" style="background: linear-gradient(to left, rgba(0,0,0,0.8) -26.48%, rgba(0,0,0,0.8) 73.52%);">
                     <%= link_to "#{list.name}", list_path(list), class: "list-title" %>
                 </div>
@@ -15,3 +18,4 @@
         </div>
     </div>
 </div>
+<%# <%= cl_image_tag 'kce9sympevktj8baqiqz', width: 400, height: 300, crops: :fill %> 
